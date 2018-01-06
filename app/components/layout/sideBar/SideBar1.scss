@@ -1,0 +1,120 @@
+@import "~SCSS_PATH/modules";
+
+.c-sidebar {
+    flex: 1;
+    color: $white;
+    background-color: $sideBar-bg;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    @include e(list) {
+        width: 100%;
+        margin: rem-calc(30px) auto rem-calc(20px);
+        list-style-type: none;
+        border-radius: 4px;
+    }
+    @include e(item) {
+        margin-top: rem-calc(0px);
+    }
+
+    .item {
+        @include e(title) {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: baseline ;
+            font-size: rem-calc(14px);
+            font-weight: 700;
+            padding: rem-calc(10px 15px);
+            border-bottom: 1px solid $sideBar-border;
+            > i:not([class*='fa-chevron-down']){
+                color: $accentColor;
+            }
+        }
+    }
+    .title {
+        @include e(link) {
+            flex:1 auto;
+            margin-left: rem-calc(15px);
+            a {
+                display: block;
+                color: $white;
+                text-decoration: none;
+            }
+        }
+        @include e(icon) {
+            font-size: rem-calc(18px);
+        }
+    }
+    .subMenu {
+        font-size: rem-calc(14px);
+        list-style-type: none;
+        position: relative;
+        background-color: $sideBar-subMenu-bg;
+        &:before {
+            position: absolute;
+            left: rem-calc(25px);
+            top: rem-calc(-1px);
+            @include triangle(bottom, rem-calc(8px), $sideBar-bg);
+        }
+
+        @include e(item) {
+            padding: rem-calc(3px 0 3px 15px);
+            &:first-child {
+                padding-top: rem-calc(7);
+                box-shadow: inset rem-calc(0 5px 5px -3px) $shade-accentColor;
+            }
+        }
+
+        @include m(entering) {
+            opacity: 0;
+            max-height: 0;
+        }
+        @include m(entered) {
+            opacity: 1;
+            max-height: 200px;
+            transition: all 0.6s ease-in-out;
+        }
+        @include m(exiting) {
+            opacity: 0;
+            max-height: 0;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .subItem {
+            @include e(title) {
+                display: flex;
+                flex-flow: row nowrap;
+                padding-left: rem-calc(16px);
+                &:before {
+                    content: '';
+                    display: inline-flex;
+                    align-self: center;
+                    width: rem-calc(5px);
+                    height: rem-calc(5px);
+                    margin-right: rem-calc(15px);
+                    border-radius: 50%;
+                    background-color: $white;
+                }
+                &:after {
+                    display: inline-flex;
+                    content: '';
+                    width: rem-calc(11px);
+                }
+                &:hover {
+                    background-color: $accentColor;
+                    &:after {
+                        position: relative;
+                        right: em(-8.5px);
+                        background-color: $accentColor;
+                        box-shadow: inset rem-calc(2 0 3 -1) $shade-accentColor;
+                    }
+                }
+            }
+            @include e(link) {
+                display: inline-flex;
+                width: 100%;
+                text-decoration: none;
+                color: #d9d9d9;
+                padding: rem-calc(10px) 0;
+            }
+        }
+    }
+}

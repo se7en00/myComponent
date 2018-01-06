@@ -1,0 +1,8 @@
+//color
+$sideBar-bg: hsl(218, 11.11% , 19.41% );//#2C3037
+$accentColor: #6B6C98;
+$sideBar-subMenu-bg: lighten(hsl(220, 11%, 22%), 4%); //#9D9DAA
+$sideBar-border: lighten($sideBar-bg, 10%);
+$white: #fff;
+$shade-accentColor: darken($accentColor,20%);
+$shade-sideBar-bg: darken($sideBar-subMenu-bg,50%);

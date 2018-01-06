@@ -1,0 +1,15 @@
+@import "~SCSS_PATH/modules";
+
+.multiplyTitle {
+    @include e(label) {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        h3 {
+            margin-left: 15px;
+        }
+    }
+    @include e(description) {
+        margin-top: 5px;
+    }
+}
