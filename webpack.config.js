@@ -7,16 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const extractModulesCSS = new ExtractTextPlugin({filename: 'css/app.css'});
 const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css'});
-
-const options = {
-    template: 'app/index.html',
-    // filename: 'index-[hash].html',
-    title: 'myComponents boilerplate',
-    showErrors: true,
-    inject: false
-};
-const htmlWebpack = new HtmlWebpackPlugin(options);
-
 module.exports = {
     // devtool: 'cheap-module-source-map',
     devtool: 'source-map',
@@ -85,19 +75,9 @@ module.exports = {
                 include: path.resolve(__dirname, 'app'),
                 exclude: /node_modules/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['es2015', 'react', 'stage-0'],
-                            plugins: [
-                                'react-hot-loader/babel',
-                                'transform-runtime',
-                                'transform-decorators-legacy']
-                        }
-                    },
-                    {
-                        loader: 'eslint-loader'
-                    }]
+                    {loader: 'babel-loader'},
+                    {loader: 'eslint-loader'}
+                ]
             },
             /**
              *  global styles
@@ -207,7 +187,13 @@ module.exports = {
         new webpack.HashedModuleIdsPlugin(),
         extractModulesCSS,
         extractGlobalCSS,
-        htmlWebpack,
+        new HtmlWebpackPlugin({
+            template: 'app/index.html',
+            // filename: 'index-[hash].html',
+            title: 'myComponents boilerplate',
+            showErrors: true,
+            inject: false
+        }),
         new OpenBrowserPlugin({
             url: 'http://localhost:8083'
         })
