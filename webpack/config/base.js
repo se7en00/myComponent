@@ -7,8 +7,7 @@ const SCSS_PATH = helper.resolve('app/scss');
 
 module.exports = {
     getBaseConfig(options) {
-        const {assetsDirectory, assetsPublicPath} = options;
-        console.log(helper.resolve(assetsDirectory));
+        const {assetsDirectory, assetsPublicPath, env} = options;
         return {
             output: {
                 path: helper.resolve(assetsDirectory),
@@ -88,7 +87,7 @@ module.exports = {
                 new webpack.DefinePlugin({
                     DEBUG: true,
                     DEVELOPMENT: true,
-                    'process.env.NODE_ENV': '"development"'
+                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || env)
                 }),
                 // https://github.com/ampedandwired/html-webpack-plugin
                 new HtmlWebpackPlugin(
