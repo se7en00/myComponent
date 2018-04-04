@@ -89,10 +89,11 @@
         "react",
         "import"
     ],
+    //加这个配置是因为esline 检测代码里import wepack定义的别名时会出错
     "settings": {
         "import/resolver": {
             "webpack": {
-                "config": "./webpack.config.js"
+                "config": "webpack/webpack.dev.conf.js"
             }
         }
     }

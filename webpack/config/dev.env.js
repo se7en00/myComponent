@@ -16,6 +16,11 @@ module.exports = (options) => {
         entry: {
             app: [
                 'react-hot-loader/patch',
+                // 'webpack-dev-server/client?http://localhost:8083', // this is same as options:inline in the devServer
+                /**
+                 /* only-dev-serve: doesn't reload the browser upon syntax errors. This is recommended for React apps because it keeps the state.
+                 /* dev-server: tries HMR (default). If there is any issue, it reloads the entire browser.
+                 **/
                 'webpack/hot/only-dev-server',
                 helper.resolve('app/index.js')],
             vendor: [
@@ -115,6 +120,8 @@ module.exports = (options) => {
             historyApiFallback: true,
             hot: true,
             inline: true,
+            overlay: true,
+            // compress: true,
             contentBase: helper.resolve(contentBase),
             host,
             port,
