@@ -10,11 +10,13 @@ const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css
 
 module.exports = (options) => {
     const {autoOpenBrowser, host, port, contentBase, devtool} = options;
+    console.log('22222');
     const baseConfig = base.getBaseConfig(options);
     return merge(baseConfig, {
         devtool,
         entry: {
             app: [
+                // 开启 React 代码的模块热替换(HMR)
                 'react-hot-loader/patch',
                 // 'webpack-dev-server/client?http://localhost:8083', // this is same as options:inline in the devServer
                 /**
@@ -22,21 +24,7 @@ module.exports = (options) => {
                  /* dev-server: tries HMR (default). If there is any issue, it reloads the entire browser.
                  **/
                 'webpack/hot/only-dev-server',
-                helper.resolve('app/index.js')],
-            vendor: [
-                'classnames',
-                'core-decorators',
-                'moment',
-                'react',
-                'react-dom',
-                'react-router',
-                'react-css-modules',
-                'react-css-themr',
-                'react-router-dom',
-                'react-transition-group',
-                'prop-types',
-                'ramda',
-                'uuid']
+                helper.resolve('app/index.js')]
         },
         module: {
             rules: [
@@ -110,7 +98,7 @@ module.exports = (options) => {
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.HashedModuleIdsPlugin(),
+            // new webpack.HashedModuleIdsPlugin(),
 
             extractModulesCSS,
             extractGlobalCSS

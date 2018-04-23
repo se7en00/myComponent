@@ -1,13 +1,20 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const helper = require('../helper');
 
 const APP_PATH = helper.resolve('app');
 const SCSS_PATH = helper.resolve('app/scss');
+// const node_modules = helper.resolve('../../node_modules');
 
 module.exports = {
     getBaseConfig(options) {
         const {assetsDirectory, assetsPublicPath, env} = options;
+        console.log('env: ', options);
+        const libPath = env === 'development' ? helper.resolve('build/lib/dev/vendor-manifest.json') :
+            helper.resolve('build/lib/product/vendor-manifest.json');
+        console.log('libPath : ', libPath);
         return {
             output: {
                 path: helper.resolve(assetsDirectory),
@@ -83,21 +90,52 @@ module.exports = {
                 }
             },
             plugins: [
+                new CleanWebpackPlugin(['build']),
                 // new CleanWebpackPlugin([helper.resolve(assetsDirectory)], { verbose: true }),
                 new webpack.DefinePlugin({
-                    DEBUG: true,
-                    DEVELOPMENT: true,
-                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || env)
+                    'process.env.NODE_ENV': JSON.stringify(env)
                 }),
                 // https://github.com/ampedandwired/html-webpack-plugin
                 new HtmlWebpackPlugin(
                     helper.htmlPluginOptions(options)
                 ),
 
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: ['vendor', 'manifest'],
-                    minChunks: Infinity
-                })
+                // 设置mainfest.json
+                new webpack.DllReferencePlugin({
+                    context: helper.defPath.ROOT_PATH,
+                    manifest: require(libPath) // eslint-disable-line
+                }),
+
+                new AddAssetHtmlPlugin([
+                    {
+                        filepath: helper.resolve('build/lib/dev/*.dll.js')
+                        // outputPath: 'lib/min',
+                        // publicPath: '/dist/lib/min',
+                        // includeSourcemap: false
+                    }
+                ])
+
+                // new webpack.optimize.CommonsChunkPlugin({
+                //     name: ['vendor', 'manifest'],
+                //     minChunks: Infinity
+                // })
+
+                // new webpack.optimize.CommonsChunkPlugin({
+                //     name: 'vendor',
+                //     minChunks(module) {
+                //         // any required modules inside node_modules are extracted to vendor
+                //         return (
+                //             module.resource &&
+                //             /\.js$/.test(module.resource) &&
+                //             module.resource.indexOf(helper.resolve('../../node_modules')) === 0
+                //         );
+                //     }
+                // }),
+                //
+                // new webpack.optimize.CommonsChunkPlugin({
+                //     name: 'manifest',
+                //     minChunks: Infinity
+                // })
             ]
         };
     }

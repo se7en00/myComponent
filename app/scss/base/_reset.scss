@@ -11,6 +11,7 @@ $rem-baseline: 16px !default;
 }
 
 html{
+    height: 100%;
     @include rem-baseline(100%);
     //font-size: 62.5%;
 }
@@ -18,6 +19,7 @@ html{
 body {
     margin: 0;
     padding: 4rem;
-    //background: #333;
+    min-height: 100%;
     font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
+    background-image: linear-gradient(to top right, #333, #B8BBC8);
 }

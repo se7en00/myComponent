@@ -11,10 +11,10 @@ const SIDE_BAR_DATA = [
         ]
     },
     {
-        name: 'Test3',
+        name: 'Test12',
         [SUB_MENU]: [
             {name: 'subTest3', link: '/subTest3'},
-            {name: 'subTest4', link: '/subTest4'}
+            {name: 'subTest8', link: '/subTest4'}
         ]
     }
 ];

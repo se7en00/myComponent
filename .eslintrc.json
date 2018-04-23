@@ -60,7 +60,11 @@
         "arrow-body-style": [2, "as-needed"],
         "no-unused-vars": [2, { "args": "none" }],
         "no-trailing-spaces": [2, { "skipBlankLines": true }],
-        "space-before-function-paren": [2, "never"],
+        "space-before-function-paren": [2, {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
         "brace-style": [2, "1tbs", { "allowSingleLine": true }],
         "spaced-comment": 0,
         "jsx-quotes": [1, "prefer-double"],
@@ -93,7 +97,7 @@
     "settings": {
         "import/resolver": {
             "webpack": {
-                "config": "webpack/webpack.dev.conf.js"
+                "config": "webpack/webpack.config.dev.js"
             }
         }
     }

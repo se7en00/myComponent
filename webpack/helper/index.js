@@ -2,6 +2,11 @@ const path = require('path');
 
 exports.resolve = (dir) => path.join(__dirname, '../..', dir);
 
+const ROOT_PATH = path.resolve(__dirname, '../../');
+exports.defPath = {
+    ROOT_PATH
+};
+
 exports.htmlPluginOptions = ({env = 'development'}) => {
     const options = {
         // filename: 'index.html',

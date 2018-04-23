@@ -1,5 +1,4 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
 import BubbleStyles from './Bubble.scss';
 import ZoeJpg from './images/zoe.jpg';
 import CaryJpg from './images/cary.jpg';
@@ -41,8 +40,8 @@ const Bubble = () => {
     ];
 
     const setupBubbleContent = bubbleObj.map((item) => (
-        <li key={item.name} styleName="comment">
-            <div styleName="comment--Meta">
+        <li key={item.name} className={BubbleStyles.comment}>
+            <div className={BubbleStyles['comment--meta']}>
                 <img src={item.img} width="80" height="80" alt=""/>
                 <h4>{item.name}</h4>
                 <span>{item.dateTime}</span>
@@ -63,4 +62,4 @@ const Bubble = () => {
     );
 };
 
-export default CSSModules(Bubble, BubbleStyles);
+export default Bubble;
