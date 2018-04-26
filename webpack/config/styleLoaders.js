@@ -14,16 +14,16 @@ const supportedBrowserList = [
 // Plain style loader
 const styleLoader = require.resolve('style-loader');
 
-const cssLoader = () => {
+const cssLoader = (isModule) => {
     const loader = {
         loader: require.resolve('css-loader'),
         options: {
-            importLoaders: 1,
+            importLoaders: 2,
             minimize: isProduction,
             sourceMap: true
         }
     };
-    if (!isProduction) {
+    if (isModule) {
         Object.assign(loader.options, {
             modules: true,
             importLoaders: 2,
@@ -92,7 +92,7 @@ const extractSassRules = (paths, extractTextPlugin, isModule) => {
         Object.assign({
             fallback: styleLoader,
             use: [
-                cssLoader(),
+                cssLoader(isModule),
                 postCssLoader(),
                 sassLoader
             ]},

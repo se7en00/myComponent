@@ -17,8 +17,9 @@ const woffUrlLoader = () => ({
         loader: require.resolve('url-loader'),
         options: {
             limit: 10000,
+            name: 'fonts/[name].[ext]',
             mimetype: 'application/font-woff',
-            outputPath: 'fonts/'
+            publicPath: '../'
             // publicPath: url => `../fonts/${url}`
         }
     }]
@@ -27,16 +28,15 @@ const woffUrlLoader = () => ({
 //file with name extension tff, tof, eot,svg will be deal with file loader,
 // and output it into fonts file of build assert, url will use relative path
 const otherFontsLoader = () => ({
-    test: /.(ttf|otf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    test: /.(woff(2)?|ttf|otf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: require.resolve('file-loader'),
     options: {
-        //name: 'static/media/[name].[hash:8].[ext]'
-        name: '[name].[ext]',
+        name: 'fonts/[name].[ext]',
         limit: 10000,
-        // useRelativePath: true,
-        outputPath: 'fonts/' // where the fonts will go
+        // outputPath: './', // where the fonts will go
+        publicPath: '../' // override the default path
         // publicPath: url => `../fonts/${url}`
-        // override the default path
+
     }
 });
 
