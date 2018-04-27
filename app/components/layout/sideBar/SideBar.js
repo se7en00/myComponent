@@ -16,9 +16,9 @@ class SideBar extends Component {
     };
 
     renderTitle = (item) => {
-        const {name, link, iconName = 'fa-question-circle'} = item;
+        const {name, link, iconName = 'fas fa-question-circle'} = item;
         const hasSubMenu = Object.prototype.hasOwnProperty.call(item, 'subItems');
-        const iconClass = cn('fa', iconName, style.title__icon);
+        const iconClass = cn(iconName, style.title__icon);
         return (
             <AccordionTitle hideDownIcon={!hasSubMenu}>
                 <i className={iconClass}/>

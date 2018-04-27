@@ -18,10 +18,10 @@
   "author": "seven",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.6",
     "classnames": "^2.2.5",
     "consecutive": "^5.0.4",
     "core-decorators": "^0.20.0",
-    "font-awesome": "^4.7.0",
     "moment": "^2.19.3",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
