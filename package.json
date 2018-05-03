@@ -5,12 +5,12 @@
   "main": "app/index.js",
   "scripts": {
     "dll": "webpack -p --env.production --config webpack/webpack.dll.conf.js --progress",
-    "build": "webpack --bail --progress --display-chunks --colors --config webpack/webpack.config.dev.js",
+    "build": "node scripts/build.js",
+    "build:debug": "node  %NODE_DEBUG_OPTION% scripts/build.js",
     "build:analyze": "node ./build/build-client-analysis.js",
     "build:dll": "node ./internals/scripts/dependencies.js",
     "start:debug": "node %NODE_DEBUG_OPTION% scripts/start.js",
     "start": "node scripts/start.js",
-    "dev": "webpack-dev-server --config webpack/webpack.config.dev.js",
     "lint": "eslint --cache --ignore-path .gitignore --ext .jsx,.js --format=node_modules/eslint-formatter-pretty .",
     "lint:msg": "validate-commit-msg",
     "lintfix": "eslint -c .eslintrc app --fix"
@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.6",
+    "chalk": "^2.4.1",
     "classnames": "^2.2.5",
     "consecutive": "^5.0.4",
     "core-decorators": "^0.20.0",
@@ -41,7 +42,6 @@
     "@babel/preset-env": "^7.0.0-beta.44",
     "@babel/preset-react": "^7.0.0-beta.44",
     "@babel/runtime": "^7.0.0-beta.44",
-    "add-asset-html-webpack-plugin": "^2.1.3",
     "autoprefixer": "^7.1.6",
     "babel-eslint": "^8.1.0",
     "babel-loader": "^8.0.0-beta.2",
@@ -63,21 +63,21 @@
     "eslint-plugin-react": "^7.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
+    "fs-extra": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.8.3",
-    "open-browser-webpack-plugin": "^0.0.5",
     "postcss": "^6.0.8",
     "postcss-flexbugs-fixes": "^3.3.0",
     "postcss-loader": "^2.0.6",
+    "react-dev-utils": "^5.0.1",
     "react-hot-loader": "^4.1.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^0.5.9",
     "webpack": "^4.6.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.3",
-    "webpack-merge": "^4.1.2"
+    "webpack-parallel-uglify-plugin": "^1.1.0"
   }
 }

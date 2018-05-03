@@ -1,6 +1,9 @@
 const port = parseInt(process.env.PORT, 10) || 8083; //eslint-disable-line
 const dev = (paths) => ({
     app: [
+        //fix css-hot-loader bug manually
+        //https://github.com/shepherdwind/css-hot-loader/issues/37
+        'css-hot-loader/hotModuleReplacement',
         // enable React HMR,react-hot-loader v4 recommended remove it from webpack config when we use hot,
         // not AppContainer component
         // 'react-hot-loader/patch',
@@ -27,7 +30,7 @@ const prod = (paths) => ({
 
 const entry = (paths) => {
     if (process.env.NODE_ENV === 'production') {
-        return prod();
+        return prod(paths);
     }
     return dev(paths);
 };

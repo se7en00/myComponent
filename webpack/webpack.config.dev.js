@@ -1,16 +1,20 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const InterpolateHtmlPlugin = require('./config/InterpolateHtmlPlugin');
-const getClientEnvironment = require('./config/env');
-const extractSassRules = require('./config/styleLoaders');
-const {resolve} = require('./config/resolve');
-const paths = require('./config/paths');
-const {entry} = require('./config/entry');
-const {output} = require('./config/output');
-const {eslintRules} = require('./config/eslintRules');
-const {babelLoader} = require('./config/babelLoader');
-const {imagesUrlLoader, fontsLoader, noMatchLoader} = require('./config/fileLoaders');
+const {
+    getClientEnvironment,
+    paths,
+    entry,
+    output,
+    resolve,
+    extractSassRules,
+    eslintRules,
+    babelLoader,
+    imagesUrlLoader,
+    fontsLoader,
+    noMatchLoader,
+    InterpolateHtmlPlugin
+} = require('./config');
 
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -18,10 +22,10 @@ const {imagesUrlLoader, fontsLoader, noMatchLoader} = require('./config/fileLoad
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-//style for css moudules
-const extractModulesCSS = new ExtractTextPlugin({filename: 'css/[name].css'});
 //global style
 const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css'});
+//style for css moudules
+const extractModulesCSS = new ExtractTextPlugin({filename: 'css/[name].css'});
 
 module.exports = {
     mode: 'development',
@@ -37,7 +41,6 @@ module.exports = {
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
             eslintRules(paths),
-
             {
                 // "oneOf" will traverse all following loaders until one will
                 // match the requirements. When no loader matches it will fall
@@ -75,8 +78,9 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         // new webpack.HashedModuleIdsPlugin(),
 
-        extractModulesCSS,
-        extractGlobalCSS
+        extractGlobalCSS,
+        extractModulesCSS
+
     ],
     // Turn off performance hints during development because we don't do any
     // splitting or minification in interest of speed. These warnings become

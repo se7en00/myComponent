@@ -88,7 +88,7 @@ const getExtractTextPluginOptions = (paths, cssFileName) => {
 
 const extractSassRules = (paths, extractTextPlugin, isModule) => {
     const regex = isModule ? /^((?!global).)*(scss|css)$/ : /.*global\.(scss|css)$/;
-    const loader = extractTextPlugin.extract(
+    let loader = extractTextPlugin.extract(
         Object.assign({
             fallback: styleLoader,
             use: [
@@ -99,6 +99,11 @@ const extractSassRules = (paths, extractTextPlugin, isModule) => {
         getExtractTextPluginOptions(paths, extractTextPlugin.filename)
         )
     );
+    // css reload with HMR
+    if (!isProduction) {
+        loader = ['css-hot-loader'].concat(loader);
+    }
+
     return {
         test: regex,
         loader

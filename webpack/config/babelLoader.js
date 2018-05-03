@@ -7,9 +7,10 @@ const babelLoader = (paths) => ({
         // directory for faster rebuilds.
         //
         // DISABLED as it causes issues with source maps at the moment
-        cacheDirectory: true
+        cacheDirectory: true,
         // Some modules have an .babelrc file that conflicts with our presets defined here
         // babelrc: false
+        compact: process.env.NODE_ENV === 'production'
     },
     include: paths.appSrc, // Matches app's src directory
     exclude: paths.appNodeModules || /node_modules/
